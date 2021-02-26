@@ -9,10 +9,6 @@
           "@c/*": ["src/components/*"],
           "@v/*": ["src/views/*"],
           "@u/*": ["src/util/*"],
-
-          
-
-
         }
     },
     "exclude": [

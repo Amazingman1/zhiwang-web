@@ -1,27 +1,27 @@
 <template>
- <div>
-头部
- </div>
+  <div>
+    头部
+  </div>
 </template>
 
 <script>
- export default {
-  name: 'headerbase',
+export default {
+  name: 'Headerbase',
+  components: {
+
+  },
   props: {
 
-},
-  watch: {
+  },
+  data() {
+    return {
 
+    }
   },
   computed: {
 
-},
-  data () {
-   return {
-
-   }
   },
-  components:{
+  watch: {
 
   },
   created() {
@@ -30,13 +30,12 @@
   mounted() {
 
   },
-  methods:{
+  methods: {
 
-  },
- }
+  }
+}
 </script>
 
 <style lang='scss' scoped>
 
- 
 </style>

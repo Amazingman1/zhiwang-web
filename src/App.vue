@@ -11,16 +11,15 @@
 
 <script>
 
-
 export default {
   name: 'App',
   components: {
 
   },
-  mounted(){
+  mounted() {
     console.log(this.$route)
   }
-};
+}
 </script>
 
 <style lang="scss">
