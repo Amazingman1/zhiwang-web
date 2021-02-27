@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 /* eslint-disable no-extend-native */
 export function render_list(list, fn) {
   var vnode = []
@@ -33,13 +34,12 @@ export function getNodeByPath(nodeTree, path) {
   return tem
 }
 export function sizeToNum(sizeStr) {
-  var sizeStr = sizeStr.replace('px', '')
-  return parseFloat(sizeStr)
+  return parseFloat(sizeStr.replace('px', ''))
 }
 export function strToNum(str, num) {
-  var num = num || 0
+  var newNum = num || 0
   var value = parseFloat(str)
-  return parseFloat(value.toFixed(num))
+  return parseFloat(value.toFixed(newNum))
 }
 export function paseToNodeTree(_data, fields, openIds) {
   var data = _data
@@ -129,7 +129,7 @@ export function paseToNodeTree(_data, fields, openIds) {
   var hasChild = function(node, vNodeGroup) {
     if (vNodeGroup) {
     //  改写为了符合eslint 如有问题可以注释 释放之前写法 共4处
-    // return vNodeGroup.hasOwnProperty('path_' + node[fields.id])
+      // return vNodeGroup.hasOwnProperty('path_' + node[fields.id])
       return Object.prototype.hasOwnProperty.call(vNodeGroup, 'path_' + node[fields.id])
     } else {
       return false

@@ -223,66 +223,13 @@ export default {
       }
     }
   },
-  computed: {
-    // filterList: function() {
-    //   return [
-    //     {
-    //       label: '客户信息:',
-    //       type: 'input',
-    //       field: 'custInfo',
-    //       size: 'small',
-    //       placeholder: '请输入客户姓名/手机号码'
-    //     },
-    //     {
-    //       label: '意向车辆用途:',
-    //       type: 'select',
-    //       field: 'intentionCarUsing',
-    //       size: 'small',
-    //       options: this.$store.state.dictList.carPurpose,
-    //       placeholder: '全部'
-    //     },
-    //     {
-    //       label: '意向车辆类型:',
-    //       type: 'select',
-    //       field: 'intentionCarType',
-    //       size: 'small',
-    //       options: this.$store.state.dictList.carType,
-    //       placeholder: '全部'
-    //     },
-    //     {
-    //       label: '购车目的:',
-    //       type: 'select',
-    //       field: 'purpose',
-    //       size: 'small',
-    //       options: this.$store.state.dictList.buyCarPurpose,
-    //       placeholder: '全部'
-    //     },
-    //     {
-    //       label: '跟进结果:',
-    //       type: 'select',
-    //       field: 'followUpResult',
-    //       size: 'small',
-    //       options: this.$store.state.dictList.followUpResult,
-    //       placeholder: '全部'
-    //     },
-    //     {
-    //       label: '最近进件日期:',
-    //       type: 'daterange',
-    //       field: ['updateStartTime', 'updateEndTime'],
-    //       size: 'small'
-    //     }
-    //   ]
-    // }
-  },
+  computed: { },
   created() {
     // 创建存储的数据  用的是good-storage插件 懒得自己写
     storage.set('key', { a: 1, b: 2 }) // 存
-    console.log(storage.get('key').a) // 取
+    console.log(storage.get('key').a, 1212) // 取
     storage.remove('key') // 删
-
-    console.log(this.$rules.getreg)
   },
-  mounted() {},
   methods: {
     aa() {
       history.go(-1)
