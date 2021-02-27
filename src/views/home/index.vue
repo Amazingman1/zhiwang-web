@@ -1,186 +1,152 @@
 <template>
-    <div class="container">
-        <headerbase ></headerbase>
-        <div class="main">
-            <aside :class="collapsed" v-show="$route.path!='/workbench'">
+  <div class="container">
+    <headerbase />
+    <div class="main">
+      <aside v-show="$route.path!='/workbench'" :class="collapsed">
 
-                       <el-menu
-                        :default-active="defaultactive"
-                        class="el-menu-vertical-demo"
-                        router
-                        unique-opened
-                        v-show="!collapsed"
-                         background-color='rgba(42,44,58,1)'
-                                        text-color="#fff"
-                                        active-text-color="#FFF"
-                                        style="overflow-y: scroll;"
-                        >
-                            <template v-for="(item,index) in kk" >
-                                <el-submenu :index="index+''" v-if="item.children " :key="item.id">
-                                    <template slot="title">
-                                        <i :class="item.iconCls"></i>
-                                        {{item.name}}
-                                    </template>
-                                    <div v-for="child in item.children" :key="child.path">
-                                        <el-menu-item :index="child.path.split('?')[0]" >{{child.name}}</el-menu-item>
-                                    </div>
-                                </el-submenu>
-                                <el-menu-item v-if="!item.children" :key="item.path" :index="item.path.split('?')[0]">
-                                    <i :class="item.iconCls"></i>
-                                        {{item.name}}
-                                </el-menu-item>
-                            </template>
-                    </el-menu>
-            </aside>
-
-
-
-            <router-view  class="ly-main-view"></router-view>
-
-            
-
-
-
-
-        </div>
-
-        
-
-
-
+        <el-menu
+          v-show="!collapsed"
+          :default-active="defaultactive"
+          class="el-menu-vertical-demo"
+          router
+          unique-opened
+          background-color="rgba(42,44,58,1)"
+          text-color="#fff"
+          active-text-color="#FFF"
+          style="overflow-y: scroll;"
+        >
+          <template v-for="(item,index) in kk">
+            <el-submenu v-if="item.children " :key="item.id" :index="index+''">
+              <template slot="title">
+                <i :class="item.iconCls" />
+                {{ item.name }}
+              </template>
+              <div v-for="child in item.children" :key="child.path">
+                <el-menu-item :index="child.path.split('?')[0]">{{ child.name }}</el-menu-item>
+              </div>
+            </el-submenu>
+            <el-menu-item v-if="!item.children" :key="item.path" :index="item.path.split('?')[0]">
+              <i :class="item.iconCls" />
+              {{ item.name }}
+            </el-menu-item>
+          </template>
+        </el-menu>
+      </aside>
+      <router-view class="ly-main-view" />
     </div>
+  </div>
 </template>
 <script>
 
-    import * as types from "@/store/mutation-types";
+import * as types from '@/store/mutation-types'
 
-    import {mapMutations} from "vuex";
-    import moment from 'moment'
+import { mapMutations } from 'vuex'
+// import moment from 'moment'
 
-    import bus from '@/util/bus.js'
+// import bus from '@/util/bus.js'
 
+export default {
+  data() {
+    return {
+      navs: [],
+      side: '',
+      collapsed: false
 
-
-
-
-    export default {
-        watch: {
-            $route: {
-              handler(to, from) {
-    
-                if (to.path != from.path && to.meta.isnav) {
-
-                  this.navs = [];
-
-                  if (to.matched.length > 1) {
-                    sessionStorage.name = to.meta.to;
-                    sessionStorage.leftnav = to.matched[1].name;
-                  } else {
-                    sessionStorage.name = to.meta.to;
-
-                    sessionStorage.leftnav = to.name;
-                  }
-                  sessionStorage.oldpath = to.path;
-  
-                               this.UPDATE_leftNav(JSON.parse(sessionStorage.sideRoutes));
-
-      
-
-
-
-                }
-                               var a = "";
-                if (!isNaN(sessionStorage.oldpath[sessionStorage.oldpath.length - 1])) {
-                  a =
-                    sessionStorage.oldpath
-                      .split("/")
-                      .slice(0, -1)
-                      .join("/") + "/1";
-                } else {
-                  a = sessionStorage.oldpath;
-                }
-                  this.UPDATE_navName({ name: a });
-
-
-
-              },
-
-            },
-
-        },
-        computed: {
-            defaultactive: {
-                get() {
-            
-            console.log(this.$store,'this.$store.state')
-                    var a = this.$store.state.navName.name;
-                    if (a) {
-                        if (!isNaN(a[a.length - 1])) {
-                            a =
-                                a
-                                    .split("/")
-                                    .slice(0, -1)
-                                    .join("/") + "/1";
-                        } else {
-                            a = this.$store.state.navName.name;
-                        }
-                    }
-                    return this.$store.state.navName.name;
-                },
-            },
-            kk:{
-                 get: function() {
-                        return this.$store.state.dictList
-                    }
-
-            }
-        },
-        data() {
-            return {
-                navs: [],
-                side:'',
-                collapsed: false,
-
-    
-            };
-        },
-        created() {
-            console.log(types.GET_dict,'types.GET_dict')
-
-              this.$store.dispatch(types.GET_dict, {
-      dictTypes: [
-        "buy_car_purpose",
-        "marriage_state",
-  
-      ]
-    });
-       
-            if(sessionStorage.sideRoutes){
-                this.UPDATE_leftNav(JSON.parse(sessionStorage.sideRoutes));
-            }
-            var a = "";
-            if(sessionStorage.oldpath){
-                  if (!isNaN(sessionStorage.oldpath[sessionStorage.oldpath.length - 1])) {
-                      a =
-                        sessionStorage.oldpath
-                          .split("/")
-                          .slice(0, -1)
-                          .join("/") + "/1";
-                    } else {
-                      a = sessionStorage.oldpath;
-                    }
-            }
-            this.UPDATE_navName({ name: a });
-        },
-        mounted() {
-   
-              
-        },
-        methods: {
-           ...mapMutations(["UPDATE_navName","UPDATE_leftNav"]),
-
+    }
+  },
+  computed: {
+    defaultactive: {
+      get() {
+        console.log(this.$store, 'this.$store.state')
+        var a = this.$store.state.navName.name
+        if (a) {
+          if (!isNaN(a[a.length - 1])) {
+            a = a
+              .split('/')
+              .slice(0, -1)
+              .join('/') + '/1'
+          } else {
+            a = this.$store.state.navName.name
+          }
         }
-    };
+        return this.$store.state.navName.name
+      }
+    },
+    kk: {
+      get: function() {
+        return this.$store.state.dictList
+      }
+
+    }
+  },
+  watch: {
+    $route: {
+      handler(to, from) {
+        if (to.path !== from.path && to.meta.isnav) {
+          this.navs = []
+
+          if (to.matched.length > 1) {
+            sessionStorage.name = to.meta.to
+            sessionStorage.leftnav = to.matched[1].name
+          } else {
+            sessionStorage.name = to.meta.to
+
+            sessionStorage.leftnav = to.name
+          }
+          sessionStorage.oldpath = to.path
+
+          this.UPDATE_leftNav(JSON.parse(sessionStorage.sideRoutes))
+        }
+        var a = ''
+        if (!isNaN(sessionStorage.oldpath[sessionStorage.oldpath.length - 1])) {
+          a = sessionStorage.oldpath
+            .split('/')
+            .slice(0, -1)
+            .join('/') + '/1'
+        } else {
+          a = sessionStorage.oldpath
+        }
+        this.UPDATE_navName({ name: a })
+      }
+
+    }
+
+  },
+  created() {
+    console.log(types.GET_dict, 'types.GET_dict')
+
+    this.$store.dispatch(types.GET_dict, {
+      dictTypes: [
+        'buy_car_purpose',
+        'marriage_state'
+
+      ]
+    })
+
+    if (sessionStorage.sideRoutes) {
+      this.UPDATE_leftNav(JSON.parse(sessionStorage.sideRoutes))
+    }
+    var a = ''
+    if (sessionStorage.oldpath) {
+      if (!isNaN(sessionStorage.oldpath[sessionStorage.oldpath.length - 1])) {
+        a = sessionStorage.oldpath
+          .split('/')
+          .slice(0, -1)
+          .join('/') + '/1'
+      } else {
+        a = sessionStorage.oldpath
+      }
+    }
+    this.UPDATE_navName({ name: a })
+  },
+  mounted() {
+
+  },
+  methods: {
+    ...mapMutations(['UPDATE_navName', 'UPDATE_leftNav'])
+
+  }
+}
 </script>
 <style lang="scss" scoped>
 .container {
