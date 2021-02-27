@@ -23,7 +23,8 @@ Vue.prototype.$rules = rules
 Object.keys(globalFilter).forEach(key => {
   Vue.filter(key, globalFilter[key])
 })
-// import math from '@u/math' // 引入加减乘除
+// eslint-disable-next-line no-unused-vars
+import math from '@u/math' // 引入加减乘除
 // 自动注册组件
 Vue.use(Components)
 Vue.use(ElementUI)

@@ -1,13 +1,15 @@
 <template>
   <div class="error-page">
-    <div class="img"
-         :style="{backgroundImage:`url(${img})`}"></div>
+    <div
+      class="img"
+      :style="{backgroundImage:`url(${img})`}"
+    />
     <div class="content">
       <h1>404</h1>
       <div class="desc">抱歉，你访问的页面不存在</div>
       <div class="actions">
         <!-- <router-link :to="{path:'/'}"> -->
-          <el-button @click="handelBack" type="primary">返回</el-button>
+        <el-button type="primary" @click="handelBack">返回</el-button>
         <!-- </router-link> -->
       </div>
     </div>
@@ -16,9 +18,7 @@
 
 <script>
 export default {
-  name: "notfount",
-  created() {
-  },
+  name: 'Notfount',
   data() {
     return {
       img: require('../../assets/404.png')
@@ -29,7 +29,7 @@ export default {
       this.$router.go(-1)
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .error-page {

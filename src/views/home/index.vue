@@ -3,7 +3,6 @@
     <headerbase />
     <div class="main">
       <aside v-show="$route.path!='/workbench'" :class="collapsed">
-
         <el-menu
           v-show="!collapsed"
           :default-active="defaultactive"
@@ -119,7 +118,6 @@ export default {
       dictTypes: [
         'buy_car_purpose',
         'marriage_state'
-
       ]
     })
 
@@ -138,9 +136,6 @@ export default {
       }
     }
     this.UPDATE_navName({ name: a })
-  },
-  mounted() {
-
   },
   methods: {
     ...mapMutations(['UPDATE_navName', 'UPDATE_leftNav'])
@@ -221,10 +216,6 @@ export default {
           font-size: 14px;
           background-color:  rgba(227, 1, 32, 1)!important;
           border-right: none;
-
-          // i {
-          //   color: rgba(227, 1, 32, 1);
-          // }
         }
         .el-submenu {
           border-left: none;
@@ -269,17 +260,12 @@ export default {
       .breadcrumb-container {
         height: 30px;
         .title {
-          // width: 200px;
           float: left;
           margin-top: -3px;
           color: #475669;
         }
-        // .breadcrumb-inner {
-        //   float: right;
-        // }
       }
       .content-wrapper {
-        // background-color: #fff;
         box-sizing: border-box;
       }
     }
@@ -296,7 +282,6 @@ export default {
       transition: all .1s ease;
       cursor: pointer;
       i.is-collapsed {
-        // margin: 0 auto;
         display: inline-block;
         width: 0;
         height: 0;
