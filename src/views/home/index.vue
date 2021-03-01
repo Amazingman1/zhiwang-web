@@ -40,9 +40,6 @@
 import * as types from '@/store/mutation-types'
 
 import { mapMutations } from 'vuex'
-// import moment from 'moment'
-
-// import bus from '@/util/bus.js'
 
 export default {
   data() {
