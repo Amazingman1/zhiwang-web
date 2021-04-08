@@ -12,7 +12,6 @@ module.exports = {
   filenameHashing: true,
   chainWebpack: config => {
     config.resolve.alias
-      .set('@', resolve('src'))
       .set('@c', resolve('src/components'))
       .set('@v', resolve('src/views'))
       .set('@u', resolve('src/util'))
